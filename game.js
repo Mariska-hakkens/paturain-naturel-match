@@ -39,11 +39,9 @@ const POINTS = {
 
 let board = [];
 let score = 0;
-let moves = 0;
 let selectedTile = null;
 let timer = null;
 let isGameOver = false;
-let isFirstMove = true;
 let timeLeft = 60;
 
 // Initialize game when DOM is loaded
