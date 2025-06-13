@@ -43,6 +43,8 @@ let selectedTile = null;
 let timer = null;
 let isGameOver = false;
 let timeLeft = 60;
+let isCooldown = false; // Add cooldown state
+const COOLDOWN_TIME = 1200; // 1.2 seconds in milliseconds
 
 // Initialize game when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
@@ -296,7 +298,15 @@ function processMatches() {
                 score += POINTS.chain_bonus;
                 document.getElementById('score').textContent = score;
             }
-            processMatches();
+            
+            // Beperk het aantal chain reactions tot maximaal 2
+            const matchesFound = findMatches();
+            if (matchesFound.normal.length > 0 || matchesFound.special.length > 0) {
+                // Voeg een kleine vertraging toe tussen chain reactions
+                setTimeout(() => {
+                    processMatches();
+                }, 1000); // 1 seconde tussen chain reactions
+            }
         }, 500);
     }, 1000); // Wait for 1 second animation
 }
@@ -308,6 +318,10 @@ function handleTileClick(e) {
     const col = parseInt(tile.dataset.col);
     
     if (!selectedTile) {
+        // Check if we're in cooldown period
+        if (isCooldown) {
+            return; // Don't allow selection during cooldown
+        }
         selectedTile = { row, col };
         tile.classList.add('selected');
         
@@ -333,6 +347,12 @@ function handleTileClick(e) {
                 processMatches();
                 moves++;
                 document.getElementById('moves').textContent = moves;
+                
+                // Start cooldown period
+                isCooldown = true;
+                setTimeout(() => {
+                    isCooldown = false;
+                }, COOLDOWN_TIME);
             } else {
                 // If no match found, swap back
                 swapTiles(board, selectedTile.row, selectedTile.col, row, col);
