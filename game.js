@@ -55,8 +55,10 @@ document.addEventListener('DOMContentLoaded', () => {
 function initializeGame() {
     initializeBoard();
     document.getElementById('score').textContent = score;
-    document.getElementById('moves').textContent = moves;
     document.getElementById('timer').textContent = timeLeft;
+    
+    // Start timer direct
+    startTimer();
     
     // Start game
     startGame();
@@ -379,9 +381,6 @@ function startTimer() {
         const timerElement = document.getElementById('timer');
         if (timeLeft <= 10) {
             timerElement.style.color = 'red';
-            // Play warning sound
-            const warningSound = new Audio('warning.mp3');
-            warningSound.play();
         } else {
             timerElement.style.color = 'white';
         }
@@ -390,7 +389,7 @@ function startTimer() {
             clearInterval(timer);
             gameOver();
         }
-    }, 1000);
+    }, 1000); // Timer interval van 1000ms = 1 seconde
 }
 
 // Game over
