@@ -266,10 +266,20 @@ function processMatches() {
         board[r][c] = match.type;
     });
 
-    // Highlight normal matches
+    // Highlight normal matches en toon score-bubble
     matches.forEach(([r, c]) => {
         const tile = document.querySelector(`[data-row="${r}"][data-col="${c}"]`);
         tile.classList.add('match');
+
+        // Score-bubble toevoegen
+        const bubble = document.createElement('div');
+        bubble.className = 'score-bubble';
+        bubble.textContent = `+${POINTS.normaal}`;
+        tile.appendChild(bubble);
+        setTimeout(() => {
+            bubble.classList.add('fade-out');
+            setTimeout(() => bubble.remove(), 500);
+        }, 1000);
     });
 
     // Calculate score

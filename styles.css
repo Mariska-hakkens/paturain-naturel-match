@@ -86,8 +86,74 @@ body {
     gap: 1rem;
     padding: 1rem;
     box-sizing: border-box;
-    flex: 1;
     margin: 0 auto;
+}
+
+/* Game Over Overlay */
+.game-over-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.overlay-content {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    width: 90%;
+    max-width: 600px;
+}
+
+.form-container {
+    margin: 2rem 0;
+}
+
+.button-container {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.game-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+.game-btn:hover {
+    background-color: #45a049;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
 }
 
 .score-container {
@@ -331,6 +397,47 @@ body {
     align-items: center;
     font-size: 12px;
     color: #4CAF50;
+}
+
+.score-bubble {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #4CAF50;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 16px;
+    font-size: 18px;
+    font-weight: bold;
+    pointer-events: none;
+    opacity: 1;
+    z-index: 10;
+    animation: score-pop 1s cubic-bezier(.23,1.05,.41,.99);
+}
+
+@keyframes score-pop {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) scale(0.7) translateY(10px);
+    }
+    30% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1.2) translateY(0);
+    }
+    70% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1) translateY(-10px);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) scale(0.8) translateY(-20px);
+    }
+}
+
+.score-bubble.fade-out {
+    opacity: 0;
+    transition: opacity 0.5s;
 }
 
 .tile.selected {
