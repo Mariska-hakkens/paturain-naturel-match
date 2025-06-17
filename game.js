@@ -282,6 +282,12 @@ function processMatches() {
         }, 1000);
     });
 
+    // Speel match-geluid af als er matches zijn
+    if (matches.length > 0) {
+        const matchSound = new Audio('match.mp3');
+        matchSound.play();
+    }
+
     // Calculate score
     const uniqueMatches = new Set(matches.map(([r, c]) => `${r},${c}`));
     const matchCount = uniqueMatches.size;
