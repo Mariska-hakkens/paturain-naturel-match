@@ -446,61 +446,76 @@ function startTimer() {
         
         if (timeLeft <= 0) {
             clearInterval(timer);
-            gameOver();
+            // Wacht tot alle matches/animaties klaar zijn
+            const waitForProcessing = () => {
+                if (!isProcessingMatches) {
+                    gameOver();
+                } else {
+                    setTimeout(waitForProcessing, 100);
+                }
+            };
+            waitForProcessing();
         }
     }, 1000); // Timer interval van 1000ms = 1 seconde
 }
-
 // Game over
 function gameOver() {
     isGameOver = true;
     clearInterval(timer);
-    
-    // Show game over container
-    const gameOverContainer = document.querySelector('.game-over-container');
-    const scoreInput = document.getElementById('player-score');
-    
-    // Set the score in the form
-    scoreInput.value = score;
-    
-    // Show the container
-    gameOverContainer.classList.remove('hidden');
-    
-    // Handle form submission
-    const form = document.getElementById('score-form');
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Get form data
-        const playerName = document.getElementById('player-name').value;
-        const playerEmail = document.getElementById('player-email').value;
-        const playerScore = score;
-        
-        // Here you could add code to send the data to a server
-        console.log('Form submitted:', {
-            name: playerName,
-            email: playerEmail,
-            score: playerScore
-        });
-        
-        // Hide the container
-        gameOverContainer.classList.add('hidden');
-        
-        // Start a new game
-        startGame();
+
+    // Verwijder alle click-events van het bord
+    const tiles = document.querySelectorAll('.tile');
+    tiles.forEach(tile => {
+        tile.style.pointerEvents = 'none';
     });
-    
+
+    // Leaderboard opslaan en ophalen
+    let leaderboard = JSON.parse(localStorage.getItem('leaderboard') || '[]');
+    // Vraag naam op, of gebruik 'Speler'
+    let spelerNaam = prompt('Vul je naam in voor het leaderboard:', 'Speler');
+    if (!spelerNaam) spelerNaam = 'Speler';
+    leaderboard.push({ naam: spelerNaam, score });
+    leaderboard.sort((a, b) => b.score - a.score);
+    leaderboard = leaderboard.slice(0, 3);
+    localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
+
+    // Maak leaderboard HTML
+    let leaderboardHtml = '<h3>Top 3 scores</h3><ol class="leaderboard">';
+    leaderboard.forEach(entry => {
+        leaderboardHtml += `<li>${entry.naam}: ${entry.score}</li>`;
+    });
+    leaderboardHtml += '</ol>';
+
+    // Toon het game over venster
+    let gameOverMessage = document.querySelector('.game-over');
+    if (!gameOverMessage) {
+        gameOverMessage = document.createElement('div');
+        gameOverMessage.className = 'game-over';
+        gameOverMessage.innerHTML = `
+            <h2>Game Over!</h2>
+            <p>Je score: ${score}</p>
+            ${leaderboardHtml}
+            <button id="restart-btn">Speel opnieuw</button>
+        `;
+        document.querySelector('.game-container').appendChild(gameOverMessage);
+    }
+
+    // Voeg event toe aan de knop
+    const restartBtn = document.getElementById('restart-btn');
+    if (restartBtn) {
+        restartBtn.onclick = function() {
+            gameOverMessage.remove();
+            const tiles = document.querySelectorAll('.tile');
+            tiles.forEach(tile => {
+                tile.style.pointerEvents = '';
+            });
+            initializeGame();
+        };
+    }
+
+    // Speel game over geluid af
     const gameOverSound = new Audio('gameover.mp3');
     gameOverSound.play();
-    
-    const gameOverMessage = document.createElement('div');
-    gameOverMessage.className = 'game-over';
-    gameOverMessage.innerHTML = `
-        <h2>Game Over!</h2>
-        <p>Je score: ${score}</p>
-        <button onclick="initializeGame()">Nieuw spel</button>
-    `;
-    document.querySelector('.game-container').appendChild(gameOverMessage);
 }
 
 // Start game

@@ -16,10 +16,38 @@
                 <p>Maak combinaties van 3 of meer gelijke items op een rij of in een kolom om punten te verdienen.</p>
                 <h3>Timer:</h3>
                 <p>Je hebt 60 seconden om zo veel mogelijk punten te verdienen.</p>
+                <img src="GIF_paturain.gif" alt="Paturain gif" class="paturain-gif">
+                <form class="actiecode-form">
+                    <label for="naam">Naam:</label>
+                    <input type="text" id="naam" name="naam" placeholder="Jouw naam" required>
+
+                    <label for="email">E-mailadres:</label>
+                    <input type="email" id="email" name="email" placeholder="jij@email.nl" required>
+
+                    <label for="actiecode">Actiecode (deze vind je aan de binnenkant van de folie):</label>
+                    <input type="text" id="actiecode" name="actiecode" pattern="[A-Za-z0-9]{3}-[A-Za-z0-9]{3}-[A-Za-z0-9]{3}-[A-Za-z0-9]{3}" placeholder="xxx-xxx-xxx-xxx" required>
+                </form>
             </div>
             <a href="spel.html" class="index-button">Start spel</a>
         </div>
     </div>
     <script src="game.js"></script>
+    <script>
+    // Automatisch streepjes toevoegen aan actiecode
+    document.addEventListener('DOMContentLoaded', function() {
+        const input = document.getElementById('actiecode');
+        if (input) {
+            input.addEventListener('input', function(e) {
+                let value = input.value.replace(/[^A-Za-z0-9]/g, '').toUpperCase();
+                // splits in groepjes van 3
+                let formatted = value.match(/.{1,3}/g);
+                if (formatted) {
+                    formatted = formatted.slice(0, 4).join('-');
+                    input.value = formatted;
+                }
+            });
+        }
+    });
+    </script>
 </body>
 </html>
