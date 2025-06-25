@@ -2,7 +2,7 @@
 const BOARD_SIZE = 8;
 
 // Sound effects
-const MATCH_SOUND = '../images/match.mp3';
+const MATCH_SOUND = 'images\match.mp3';
 
 // Function to play match sound
 function playMatchSound() {
