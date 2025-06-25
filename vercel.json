@@ -7,6 +7,10 @@
     {
       "src": "pages/spel.html",
       "use": "@vercel/static-build"
+    },
+    {
+      "src": "pages/styles.css",
+      "use": "@vercel/static-build"
     }
   ],
   "routes": [
@@ -17,6 +21,10 @@
     {
       "src": "/spel",
       "dest": "/pages/spel.html"
+    },
+    {
+      "src": "/pages/styles.css",
+      "dest": "/pages/styles.css"
     }
   ]
 }
