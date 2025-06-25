@@ -36,21 +36,19 @@
     <script>
         // Automatisch streepjes toevoegen aan actiecode
         document.addEventListener('DOMContentLoaded', function() {
-    // Automatisch streepjes toevoegen aan actiecode
-    document.addEventListener('DOMContentLoaded', function() {
-        const input = document.getElementById('actiecode');
-        if (input) {
-            input.addEventListener('input', function(e) {
-                let value = input.value.replace(/[^A-Za-z0-9]/g, '').toUpperCase();
-                // splits in groepjes van 3
-                let formatted = value.match(/.{1,3}/g);
-                if (formatted) {
-                    formatted = formatted.slice(0, 4).join('-');
-                    input.value = formatted;
-                }
-            });
-        }
-    });
+            const input = document.getElementById('actiecode');
+            if (input) {
+                input.addEventListener('input', function(e) {
+                    let value = input.value.replace(/[^A-Za-z0-9]/g, '').toUpperCase();
+                    // splits in groepjes van 3
+                    let formatted = value.match(/.{1,3}/g);
+                    if (formatted) {
+                        formatted = formatted.slice(0, 4).join('-');
+                        input.value = formatted;
+                    }
+                });
+            }
+        });
     </script>
 </body>
 </html>

@@ -2,7 +2,34 @@
 const BOARD_SIZE = 8;
 
 // Sound effects
-const MATCH_SOUND = 'images\match.mp3';
+const MATCH_SOUND = '../images/match.mp3';
+const CLICK_SOUND = '../images/click.mp3';
+
+// Function to play match sound
+function playMatchSound() {
+    const audio = new Audio(MATCH_SOUND);
+    audio.play().catch(error => {
+        console.error('Could not play match sound:', error);
+    });
+}
+
+// Function to play click sound
+function playClickSound() {
+    const audio = new Audio(CLICK_SOUND);
+    audio.play().catch(error => {
+        console.error('Could not play click sound:', error);
+    });
+}
+
+// Function to handle tile click
+document.addEventListener('DOMContentLoaded', () => {
+    const tiles = document.querySelectorAll('.game-tile');
+    tiles.forEach(tile => {
+        tile.addEventListener('click', () => {
+            playClickSound();
+        });
+    });
+});
 
 // Function to play match sound
 function playMatchSound() {
