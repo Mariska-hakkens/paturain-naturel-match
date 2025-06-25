@@ -6,7 +6,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-image: url('paturainauto.jpg');
+    background-image: url('../images/paturainauto.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
