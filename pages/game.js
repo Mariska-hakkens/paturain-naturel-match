@@ -2,20 +2,20 @@
 const BOARD_SIZE = 8;
 const TYPES = {
   // Normale tegels
-  brood: 'brood.png',
-  cracker: 'cracker.png',
-  lavendel: 'lavendel.png',
-  paturain: 'paturainnaturel.png',
+  brood: '../images/brood.png',
+  cracker: '../images/cracker.png',
+  lavendel: '../images/lavendel.png',
+  paturain: '../images/paturainnaturel.png',
   
   // Speciale tegels
-  exploderende_kaas: 'exploderende_kaas.png',
-  borrelplank_booster: 'borrelplank_booster.png',
+  exploderende_kaas: '../images/exploderende_kaas.png',
+  borrelplank_booster: '../images/borrelplank_booster.png',
   
   // Power-ups
-  horizontaal: 'horizontaal.png',
-  verticaal: 'verticaal.png',
-  explosie: 'explosie.png',
-  verwijder_alle: 'verwijder_alle.png'
+  horizontaal: '../images/horizontaal.png',
+  verticaal: '../images/verticaal.png',
+  explosie: '../images/explosie.png',
+  verwijder_alle: '../images/verwijder_alle.png'
 };
 
 // Points system
