@@ -1,21 +1,23 @@
 // Constants
 const BOARD_SIZE = 8;
+
+// Sound effects
+const MATCH_SOUND = '../images/match.mp3';
+
+// Function to play match sound
+function playMatchSound() {
+    const audio = new Audio(MATCH_SOUND);
+    audio.play().catch(error => {
+        console.error('Could not play sound:', error);
+    });
+}
+
 const TYPES = {
   // Normale tegels
   brood: '../images/brood.png',
   cracker: '../images/cracker.png',
   lavendel: '../images/lavendel.png',
-  paturain: '../images/paturainnaturel.png',
-  
-  // Speciale tegels
-  exploderende_kaas: '../images/exploderende_kaas.png',
-  borrelplank_booster: '../images/borrelplank_booster.png',
-  
-  // Power-ups
-  horizontaal: '../images/horizontaal.png',
-  verticaal: '../images/verticaal.png',
-  explosie: '../images/explosie.png',
-  verwijder_alle: '../images/verwijder_alle.png'
+  paturain: '../images/paturainnaturel.png'
 };
 
 // Points system
@@ -284,8 +286,7 @@ function processMatches() {
 
     // Speel match-geluid af als er matches zijn
     if (matches.length > 0) {
-        const matchSound = new Audio('match.mp3');
-        matchSound.play();
+        playMatchSound();
     }
 
     // Calculate score
