@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paturain Naturel Match</title>
-    <link rel="stylesheet" href="C:\Users\maris\CascadeProjects\paturain-naturel-match\pages\styles.css">
+    <link rel="stylesheet" href="/pages/styles.css">
 </head>
 <body>
     <div class="index-page">
@@ -16,7 +16,7 @@
                 <p>Maak combinaties van 3 of meer gelijke items op een rij of in een kolom om punten te verdienen.</p>
                 <h3>Timer:</h3>
                 <p>Je hebt 60 seconden om zo veel mogelijk punten te verdienen.</p>
-                <img src="C:\Users\maris\CascadeProjects\paturain-naturel-match\images\GIF_paturain.gif" alt="Paturain gif" class="paturain-gif">
+                <img src="/images/GIF_paturain.gif" alt="Paturain gif" class="paturain-gif">
                 <form class="actiecode-form">
                     <label for="naam">Naam:</label>
                     <input type="text" id="naam" name="naam" placeholder="Jouw naam" required>
@@ -28,11 +28,14 @@
                     <input type="text" id="actiecode" name="actiecode" pattern="[A-Za-z0-9]{3}-[A-Za-z0-9]{3}-[A-Za-z0-9]{3}-[A-Za-z0-9]{3}" placeholder="xxx-xxx-xxx-xxx" required>
                 </form>
             </div>
-            <a href="C:\Users\maris\CascadeProjects\paturain-naturel-match\pages\spel.html" class="index-button">Start spel</a>
+            <a href="/spel.html" class="index-button">Start spel</a>
         </div>
     </div>
-    <script src="C:\Users\maris\CascadeProjects\paturain-naturel-match\pages\game.js"></script>
+    <script src="/pages/game.js"></script>
+
     <script>
+        // Automatisch streepjes toevoegen aan actiecode
+        document.addEventListener('DOMContentLoaded', function() {
     // Automatisch streepjes toevoegen aan actiecode
     document.addEventListener('DOMContentLoaded', function() {
         const input = document.getElementById('actiecode');
